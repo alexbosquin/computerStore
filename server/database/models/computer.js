@@ -5,24 +5,19 @@ const defaultImageLink = 'http://www.doornmore.com/media/customoptions/66/88676/
 
 let schemaComputer = new Schema({
     title: {
-        type: String
+        type: String,
+        required: true
     },
     description:{
-        brand: {type:String,required:true},
-        processor: {type:String,required:true},
-        cooler: {type:String,required:true},
-        motherBoard: {type:String,required:true},
-        ram: {type:String,required:true},
-        hdd: {type:String,required:true},
-        ssd: {type:String,default: 'none',required:true},
-        videoCard: {type:String,required:true,default:'none'},
-        font: {type:String,required:true},
+        type: String,
+        required:true
     },
     price: {
         type: Number,
         required : true
-    },
-    imageLink: [{link:{type:String,required:true,default:defaultImageLink}}]
+        
+    }
+
 });
 
 

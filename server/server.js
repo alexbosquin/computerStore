@@ -30,4 +30,6 @@ app.post('/register', (request,response) => {
     });
 })
 
+app.use('/computer',routerComputer);
+
 app.listen(process.env.PORT || 3000);

@@ -11,12 +11,15 @@ const messageUnable = 'unable to save to database';
 routerComputer.route('/add').post((request,response)=>{
     let computer = new modelComputer(request.body);
 
-    computer.save()
-    .then(item =>{
-        response.status(status.success).json({messageAdded});
-    })
-    .catch(err => {
-        response.status(status.invalid).send({messageUnable});
+    computer.save((error) =>{
+        if (!error)
+        {
+            response.status(status.success).json({messageAdded});
+        }
+        else
+        {
+            response.send(error);
+        }
     });
 });
 

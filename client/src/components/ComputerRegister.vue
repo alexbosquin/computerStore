@@ -2,41 +2,65 @@
   <div class="reg">
     <h1>{{ msg }}</h1>
     <input 
-      type="email"
-      placeholder="email"
-      name="email"
-      v-model="email"
+      type="text"
+      placeholder="title"
+      name="title"
+      v-model="title"
     />
-        <input 
-      type="password"
-      placeholder="password"
-      name="password"
-      v-model="password"
-    />
-    <button @click="register">Register</button>
+
+    <br>
+
+    <input
+      type="textarea"
+      placeholder="product description"
+      name="description"
+      v-model="description" 
+      />
+
+    <br>
+
+      <input
+      type="number"
+      placeholder="price"
+      name="price"
+      v-model="price"
+      />
+    
+	<br>
+
+    <button @click="addComputer">Add</button>
+	<br>
+	<p>{{result}}</p>
   </div>
 </template>
 
 <script>
-import AuthenticationServices from '@/services/AuthenticationService'
+
+import ServiceRegisterComputer from '@/services/ServiceRegisterComputer'
 
 export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Register',
-      email:'',
-      password:''
+	  msg: 'Register a Computer',
+	  result: '',
+      title: '',
+      description: '',
+      price: 0.00
+      
     }
   },
-  methods:{
-    async register(){
-      const response = await AuthenticationServices.register({
-        email:this.email,
-        password:this.password
-      });
-      console.log(response.data);
-    }
+  methods: {
+	  async addComputer(){
+		  const response = await ServiceRegisterComputer.addComputer({
+			  title:this.title,
+			  description:this.description,
+			  price:this.price
+		  });
+		  this.result = response.data.message.title;
+		  console.log(response);
+	  }
+
   }
 }
 </script>
