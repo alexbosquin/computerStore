@@ -75,3 +75,5 @@ routerComputer.route('/delete/:id').get((request,response)=>{
         }
     } );
 });
+
+module.exports = routerComputer;

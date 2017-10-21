@@ -23,8 +23,11 @@ app.use(morgan('combine'));
 app.use(bodyParser.json());
 app.use(cors());
 
-app.listen(process.env.PORT || 3000);
+app.post('/register', (request,response) => {
+    response.send({
+        message: 'Hello: ${req.body.email} your user has registered'
 
-app.get('/', (request,response) => {
-    response.send({message:'hello world'});
+    });
 })
+
+app.listen(process.env.PORT || 3000);

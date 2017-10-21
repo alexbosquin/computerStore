@@ -4,8 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node node_modules/nodemon/bin/nodemon.js server.js --exec",
+    "lint": "node node_modules/.bin/eslint **.*.js"
   },
   "author": "alexbosquin",
   "license": "ISC",
@@ -14,7 +14,13 @@
     "cors": "^2.8.4",
     "express": "^4.16.2",
     "mongoose": "^4.12.3",
-    "morgan": "^1.9.0",
     "nodemon": "^1.12.1"
+  },
+  "devDependencies": {
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.0",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1"
   }
 }
