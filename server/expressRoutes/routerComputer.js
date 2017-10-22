@@ -4,23 +4,19 @@ const routerComputer = express.Router();
 
 const modelComputer = require('../database/models/computer');
 
-const status = {success:200,invalid:400};
-const messageAdded = 'computer added successfully';
-const messageUnable = 'unable to save to database';
+
 
 routerComputer.route('/add').post((request,response)=>{
     let computer = new modelComputer(request.body);
 
-    computer.save((error) =>{
-        if (!error)
-        {
-            response.status(status.success).json({messageAdded});
-        }
-        else
-        {
-            response.send(error);
-        }
-    });
+    computer.save()
+        .then(item => {
+            response.status(200).json({'Computer': 'Computer added successfully','error':false});
+        })
+        .catch(err => {
+            response.status(200).json({'Computer':"unable to save to database",'error':true});
+        });
+    
 });
 
 

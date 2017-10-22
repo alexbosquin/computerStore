@@ -31,7 +31,11 @@
     <button @click="addComputer">Add</button>
 	<br>
 	<p>{{result}}</p>
+   <div class="col-md-4">
+    	<router-link :to="{ name: 'ComputerAdmin' }" class="btn btn-primary">Manage Computers</router-link>
+   </div>
   </div>
+
 </template>
 
 <script>
@@ -43,7 +47,7 @@ export default {
   data () {
     return {
 	  msg: 'Register a Computer',
-	  result: '',
+	  result: ' click add to register a computer',
       title: '',
       description: '',
       price: 0.00
@@ -57,9 +61,14 @@ export default {
 			  description:this.description,
 			  price:this.price
 		  });
-		  this.result = response.data.message.title;
-		  console.log(response);
+      this.result = response.data.Computer;
+	  if (response.data.error == false)
+	  {
+		  this.title = '';
+		  this.description = '';
+		  this.price = '';
 	  }
+  	}
 
   }
 }
