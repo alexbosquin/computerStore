@@ -40,7 +40,8 @@
 
 <script>
 
-import ServiceListComputer from '@/services/ServiceListComputer'
+import ServiceRegisterComputer from '@/services/ServiceRegisterComputer'
+
 export default {
   name: 'HelloWorld',
   data () {
@@ -49,23 +50,11 @@ export default {
 	  result: ' click add to register a computer',
       title: '',
       description: '',
-	  price: 0.00,
-	  items: []
+      price: 0.00
       
-	}
-	
-  },
-  created: function()
-  {
-	  this.fetchData();
-
+    }
   },
   methods: {
-	  async fetchData(){
-		 const response = await ServiceListComputer.listComputerByID(this.$route.query.id);
-			console.log(response.data);
-		 },
-
 	  async addComputer(){
 		  const response = await ServiceRegisterComputer.addComputer({
 			  title:this.title,
@@ -84,3 +73,4 @@ export default {
   }
 }
 </script>
+
