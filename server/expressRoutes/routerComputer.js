@@ -34,7 +34,22 @@ routerComputer.route('/').get((request,response) =>{
     });
 });
 
+
 const messageCantLoadDocument = 'Cound not load document';
+
+routerComputer.route('find/:id').get( (request,response)=>{
+    modelComputer.findOne( {_id: request.params.id},(error,computer)=>{
+        if (error)
+        {
+            response.json(error);
+        }
+        else
+        {
+            response.json(computer);
+        }
+    } );
+} );
+
 const messageUpdateComplete = 'Update Complete';
 const messageUnableUpdate = 'Unable to update the database';
 
