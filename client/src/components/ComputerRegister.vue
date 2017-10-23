@@ -1,7 +1,17 @@
 <template>
-	<div>
-		<h4 class="text-md-center">Center align on medium viewport sizes</h4>
-              <v-form v-model="valid" style="padding:10%">
+	<div style="padding:2%">
+
+<v-layout >
+		<v-flex >
+		<v-card class="grid">
+			<v-toolbar color="white" flat>
+			<v-btn icon light @click="gotoAdmin">
+				<v-icon color="grey darken-2">arrow_back</v-icon>
+			</v-btn>
+			<v-toolbar-title class="grey--text text--darken-4">Register Computer</v-toolbar-title>
+			</v-toolbar>
+			<div style="padding:5%">
+				<v-form v-model="valid" >
 				<v-text-field
 				label="Title"
 				v-model="title"
@@ -23,8 +33,37 @@
 				v-model="price"
 				required
 				></v-text-field>
+				
+				</v-form>
+			</div>
+			<v-container fluid grid-list-sm class="text-md-center">
+			<v-layout row wrap >
+				<v-flex s v-for="i in 1" :key="i">
+					
+				<img class="image" v-bind:src="''" alt="lorem" width="100%" height="100%">
+					
+				</v-flex>
+				
+			</v-layout>
 				<p>{{result}}</p>
-			</v-form>
+				<div>
+              		<v-btn flat color="primary" @click="addComputer">add computer</v-btn>
+            	</div>
+			</v-container>
+			
+			<v-footer class="mt-5">
+
+			
+			</v-footer>
+		</v-card>
+		</v-flex>
+	</v-layout>
+
+			
+
+	
+	
+	
 
 	</div>
 </template>
@@ -35,6 +74,7 @@ import ServiceRegisterComputer from '@/services/ServiceRegisterComputer'
 
   export default {
     data: () => ({
+		dialog: false,
 		result:'',
       valid: true,
       title: '',
@@ -50,7 +90,6 @@ import ServiceRegisterComputer from '@/services/ServiceRegisterComputer'
 		(v) => v && v.length >= 50 || 'Description is too short!'
 		   ],
 		price: ''
-     
     }),
     methods: {
       submit () {
@@ -77,8 +116,16 @@ import ServiceRegisterComputer from '@/services/ServiceRegisterComputer'
 		  this.title = '';
 		  this.description = '';
 		  this.price = '';
+		  this.gotoAdmin();
 	  }
-  	}
+	  },
+	  gotoAdmin(){
+        
+        this.$router.push('/computeradmin');
+      }
+
+
+
     }
   }
 </script>

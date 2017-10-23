@@ -37,7 +37,7 @@ routerComputer.route('/').get((request,response) =>{
 
 const messageCantLoadDocument = 'Cound not load document';
 
-routerComputer.route('find/:id').get( (request,response)=>{
+routerComputer.route('/find/:id').get( (request,response)=>{
     modelComputer.findOne( {_id: request.params.id},(error,computer)=>{
         if (error)
         {
@@ -53,7 +53,7 @@ routerComputer.route('find/:id').get( (request,response)=>{
 const messageUpdateComplete = 'Update Complete';
 const messageUnableUpdate = 'Unable to update the database';
 
-routerComputer.route('update/:id').post((request,response)=>{
+routerComputer.route('/update/:id').post((request,response)=>{
     modelComputer.findById(request.params.id,(error,computer)=>{
         if (!computer)
         {

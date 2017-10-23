@@ -1,28 +1,13 @@
 <template>
-  <v-carousel hide-controls>
-    <v-carousel-item v-for="(item,i) in items" v-bind:src="item.src" :key="i"></v-carousel-item>
-  </v-carousel>
+
+  <div>
+    Home
+  </div>
+
 </template>
 
-<script>
-  export default {
-    data () {
-      return {
-        items: [
-          {
-            src: '/static/doc-images/carousel/squirrel.jpg'
-          },
-          {
-            src: '/static/doc-images/carousel/sky.jpg'
-          },
-          {
-            src: '/static/doc-images/carousel/bird.jpg'
-          },
-          {
-            src: '/static/doc-images/carousel/planet.jpg'
-          }
-        ]
-      }
-    }
-  }
-</script>
+<style lang="stylus">
+  .media
+    height: 100%
+    margin: 0
+</style>

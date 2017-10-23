@@ -43,8 +43,6 @@
         </template>
                     
       </v-data-table>
-      asdasds
-      <test></test>
 
 
     </v-card>

@@ -4,6 +4,8 @@ import Register from '@/components/Register'
 import ComputerRegister from '@/components/ComputerRegister'
 import ComputerAdmin from '@/components/ComputerAdmin'
 import ComputerEdit from '@/components/ComputerEdit'
+import Home from '@/components/Home'
+import ShowComputer from '@/components/ShowComputer'
 Vue.use(Router)
 
 export default new Router({
@@ -12,6 +14,11 @@ export default new Router({
       path: '/',
       name: 'Register',
       component: Register
+    },
+    {
+      path: '/home',
+      name: 'Home',
+      component: Home
     },
     {
       path: '/computerregister',
@@ -28,6 +35,11 @@ export default new Router({
       path: '/computeredit',
       name: 'ComputerEdit',
       component: ComputerEdit
+    },
+    {
+      path: '/showComputer',
+      name: 'ShowComputer',
+      component: ShowComputer
     },
   ]
 })
