@@ -2,15 +2,14 @@
 
   <div>
     
-    <v-carousel icon="adjust" >
-		
-      <v-carousel-item  class="images" v-for="(computer,i) in computers" v-bind:src="computer.images[0].src" :key="i"></v-carousel-item>
+    <v-carousel icon="adjust" v-if="dataReady" >
+      <v-carousel-item v-for="(computer,i) in computers" v-bind:src="computer.images[0].src" :key="i"></v-carousel-item>
     </v-carousel>
 
 
       <v-layout row wrap>
         <v-flex xs4  offset-sm v-for="(computer,i) in computers" :key="i">
-          <v-card style="margin:5%"  >
+          <v-card style="margin:5%" class="images"  >
             <v-card-media
               class="white--text"
               height="200px"
@@ -18,22 +17,19 @@
             >
               <v-container fill-height fluid>
                 <v-layout fill-height>
-                  <v-flex xs12 align-end flexbox>
-                    <span class="headline title" >{{computer.title}}</span>
-                  </v-flex>
+               
                 </v-layout>
               </v-container>
             </v-card-media>
             <v-card-title>
               <div>
-                <span class="grey--text">Number 10</span><br>
-                <span>Whitehaven Beach</span><br>
-                <span>Whitsunday Island, Whitsunday Islands</span>
+                <span class="grey--text">{{computer.title}}</span><br>
+                <span>R$ {{computer.price}}</span><br>
+               
               </div>
             </v-card-title>
             <v-card-actions>
-              <v-btn flat color="orange">Share</v-btn>
-              <v-btn flat color="orange">Explore</v-btn>
+              <v-btn flat color="green" style="margin-left:5%" @click="gotoShowComputer(computer._id)">explore</v-btn>
             </v-card-actions>
           </v-card>
         </v-flex>
@@ -49,8 +45,8 @@ import ServiceListComputer from '@/services/ServiceListComputer'
   export default {
     data () {
       return {
-		computers: [],
-		iterator: 0
+        dataReady:false,
+       computers: []
       }
     },
     created: function(){
@@ -60,18 +56,13 @@ import ServiceListComputer from '@/services/ServiceListComputer'
 
 		async fetchComputers(){
 			const response = await ServiceListComputer.listComputers();
-			this.computers = response.data;
-			this.iterator = this.objectLength(this.computers);
+      this.computers = response.data;
+      this.dataReady = true;
+      console.log(this.dataReady);
 		},
-		objectLength(obj){
-
-			var counter = 0;
-
-			for(let i in obj)
-			{
-			counter +=1;
-			}
-			return counter
+		gotoShowComputer(id)
+		{
+			this.$router.push('showcomputer?id='+id);
 		}
 
     }
@@ -80,7 +71,7 @@ import ServiceListComputer from '@/services/ServiceListComputer'
 
 <style scoped>
 .images {
-  transform:scale(.8)
+  transform:scale(.9)
 }
 .images:hover{
   transform:scale(1)

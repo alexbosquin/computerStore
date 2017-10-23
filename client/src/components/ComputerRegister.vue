@@ -26,29 +26,41 @@
 				required
 				:counter="500"
 				multi-line
-				></v-text-field>
+				></v-text-field> 
 				<v-text-field
 				label="Price"
 				type="number"
 				v-model="price"
 				required
 				></v-text-field>
+				<v-layout  v-for="(image,i) in imageCount">
+					<v-text-field
+					label="ImageLink"
+					type="text"
+					v-model="images[i].src"
+					required>
+					</v-text-field>
+					
+					<div >
+                <v-btn color="primary" fab small dark @click="imageCounterIncrease()">
+                  <v-icon>add</v-icon>
+                </v-btn>
+          
+					
+                <v-btn color="primary" fab small dark @click="imageCounterDecrease()">
+                  <v-icon>remove</v-icon>
+                </v-btn>
+          </div>
+				</v-layout>
 				
 				</v-form>
 			</div>
 			<v-container fluid grid-list-sm class="text-md-center">
-			<v-layout row wrap >
-				<v-flex s v-for="i in 1" :key="i">
-					
-				<img class="image" v-bind:src="''" alt="lorem" width="100%" height="100%">
-					
-				</v-flex>
-				
-			</v-layout>
+		
 				<p>{{result}}</p>
 				<div>
-              		<v-btn flat color="primary" @click="addComputer">add computer</v-btn>
-            	</div>
+            <v-btn flat color="primary" @click="addComputer">add computer</v-btn>
+        </div>
 			</v-container>
 			
 			<v-footer class="mt-5">
@@ -75,6 +87,8 @@ import ServiceRegisterComputer from '@/services/ServiceRegisterComputer'
   export default {
     data: () => ({
 		dialog: false,
+		imageCount: 1,
+		images:[{src:''}],
 		result:'',
       valid: true,
       title: '',
@@ -102,27 +116,41 @@ import ServiceRegisterComputer from '@/services/ServiceRegisterComputer'
 		this.title = '';
 		this.description = '';
 		this.price = 0;
+		this.images = [];
 	  },
 	  
 	async addComputer(){
 		  const response = await ServiceRegisterComputer.addComputer({
 			  title:this.title,
 			  description:this.description,
-			  price:this.price
-		  });
-      this.result = response.data.Computer;
+				price:this.price,
+				images:this.images
+			});
+			console.log(response.data);
+			this.result = response.data.Computer;
+			
 	  if (response.data.error == false)
 	  {
 		  this.title = '';
 		  this.description = '';
-		  this.price = '';
+			this.price = '';
+			this.images = [];
 		  this.gotoAdmin();
 	  }
 	  },
 	  gotoAdmin(){
         
         this.$router.push('/computeradmin');
-      }
+			},
+		imageCounterIncrease(){
+			this.images.push({src:''});
+			this.imageCount += 1;
+		},
+		imageCounterDecrease(){
+			let imgCount = this.imageCount;
+			if (imgCount-1 != 0)
+					this.imageCount -= 1;
+		}
 
 
 

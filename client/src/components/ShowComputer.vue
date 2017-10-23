@@ -1,22 +1,26 @@
 <template>
-  <v-layout row>
-    <v-flex xs12 sm6 offset-sm3>
+<div>
+        
+          <v-carousel>
+            <v-carousel-item v-for="(src,i) in item.images" v-bind:src="src[i]" :key="i"></v-carousel-item>
+          </v-carousel>
+  <v-layout row style="padding:5%" v-if="dataReady">
+    
+    <v-flex xs sm8 offset-sm2>
+      
       <v-card>
-        <v-card-media src="/static/doc-images/lists/ali.png" height="300px">
+
+         <v-card-media >
           <v-layout column class="media">
             <v-card-title>
-              <v-btn dark icon @click="goback">
+              <v-btn light icon color="white" @click="goback">
                 <v-icon>chevron_left</v-icon>
               </v-btn>
-              <v-toolbar-title class="grey--text text--darken-4 ">{{item.title}}</v-toolbar-title>
-			
               <v-spacer></v-spacer>
               
             </v-card-title>
             <v-spacer></v-spacer>
-            <v-card-title class="white--text pl-5 pt-5">
-              <div class="display-1 pl-5 pt-5">Ali Conners</div>
-            </v-card-title>
+          
           </v-layout>
         </v-card-media>
         <v-list two-line>
@@ -25,7 +29,7 @@
               <v-icon color="indigo">chat_bubble</v-icon>
             </v-list-tile-action>
             <v-list-tile-content>
-              <v-list-tile-title>Product Description</v-list-tile-title>
+              <v-list-tile-title>{{item.title}}</v-list-tile-title>
               <v-list-tile-sub-title>{{item.description}}</v-list-tile-sub-title>
             </v-list-tile-content>
             <v-list-tile-action>
@@ -63,15 +67,7 @@
             </v-list-tile-content>
           </v-list-tile>
         <v-divider inset></v-divider>
-          <v-list-tile @click="">
-            <v-list-tile-action>
-              <v-icon color="indigo">location_on</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title>1400 Main Street</v-list-tile-title>
-              <v-list-tile-sub-title>Orlando, FL 79938</v-list-tile-sub-title>
-            </v-list-tile-content>
-          </v-list-tile>
+         
         </v-list>
       </v-card>
     </v-flex>
@@ -79,6 +75,7 @@
 
 
 
+</div>
 </template>
 
 
@@ -88,9 +85,15 @@ import ServiceListComputer from '@/services/ServiceListComputer'
 export default {
   data(){
   return{
-    item: {'title':''},
+    dataReady:false,
+    item: {},
+
     discount:0,
-    credit: 0
+    credit: 0,
+    dialog: false,
+    notifications: false,
+    sound: true,
+    widgets: false
   } 
   },
   methods:{
@@ -102,8 +105,8 @@ export default {
         const response = await ServiceListComputer.listComputerByID(id);
         this.item = response.data;
         this.discount = this.calculatePrice_10percentDiscount(this.item.price);
-
-        console.log(response.data);
+        this.dataReady = true;
+        console.log(this.dataReady);
     },
     calculatePrice_10percentDiscount(value){
       let result = parseFloat(value);

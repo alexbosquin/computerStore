@@ -16,7 +16,9 @@ let schemaComputer = new Schema({
         type: Number,
         required : true
         
-    }
+    },
+    images:[
+        {src:{type: String,required: true}}]
 
 });
 
