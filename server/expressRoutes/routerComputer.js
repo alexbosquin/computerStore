@@ -10,11 +10,11 @@ routerComputer.route('/add').post((request,response)=>{
     let computer = new modelComputer(request.body);
 
     computer.save()
-        .then(item => {
+        .then(computer => {
             response.status(200).json({'Computer': 'Computer added successfully','error':false});
         })
         .catch(err => {
-            response.status(200).json({'Computer':"unable to save to database",'error':true});
+            response.status(400).send(err);
         });
     
 });
@@ -53,26 +53,27 @@ routerComputer.route('/find/:id').get( (request,response)=>{
 const messageUpdateComplete = 'Update Complete';
 const messageUnableUpdate = 'Unable to update the database';
 
-routerComputer.route('/update/:id').post((request,response)=>{
-    modelComputer.findById(request.params.id,(error,computer)=>{
-        if (!computer)
+routerComputer.route('/update/:id').put((request,response)=>{
+    let id = request.params.id;
+    modelComputer.findByIdAndUpdate({_id: id},request.body,(error,computer)=>{
+        if (error)
         {
-            return next(new Error(messageCantLoadDocument));
+            console.log(error);
+            response.status(404).send();
         }
         else
         {
-            computer.description = request.body.description;
-            computer.price = request.body.price;
-            computer.imageLink = request.body.imagelink;
-
-            computer.save().then(computer => {
-                response.json(messageUpdateComplete);
-            })
-            .catch((error => {
-                response.status(status.invalid).send(messageUnableUpdate);
-            }));
+            if (!computer)
+            {
+                response.status(500).send();
+            }
+            else
+            {
+                response.status(200).json(messageUpdateComplete);
+            }
         }
     });
+    
 });
 
 const messageSuccessRemoved = 'Successfully removed a computer from the list';

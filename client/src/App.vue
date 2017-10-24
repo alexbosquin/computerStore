@@ -6,6 +6,7 @@
     <v-toolbar-items class="hidden-sm-and-down" v-for="item in items" :key="item.text">
       <v-btn flat @click="gotoPage(item.route)">{{ item.text }}</v-btn>
     </v-toolbar-items>
+    <div class="g-signin2" data-onsuccess="onSignIn">teste</div>
   </v-toolbar>
     <router-view></router-view>
   </div>
@@ -24,10 +25,6 @@
           {
             text: 'Dashboard',
             route: 'computeradmin'
-          },
-          {
-            text: 'Login/Register',
-            route: 'register'
           }
         ]
       }

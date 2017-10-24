@@ -1,16 +1,14 @@
 <template>
 <div>
         
-          <v-carousel>
-            <v-carousel-item v-for="(src,i) in item.images" v-bind:src="src[i]" :key="i"></v-carousel-item>
-          </v-carousel>
+          
   <v-layout row style="padding:5%" v-if="dataReady">
     
     <v-flex xs sm8 offset-sm2>
       
       <v-card>
 
-         <v-card-media >
+         <v-card-media  v-bind:src="item.image" height="300px">
           <v-layout column class="media">
             <v-card-title>
               <v-btn light icon color="white" @click="goback">

@@ -3,7 +3,7 @@
   <div>
     
     <v-carousel icon="adjust" v-if="dataReady" >
-      <v-carousel-item v-for="(computer,i) in computers" v-bind:src="computer.images[0].src" :key="i"></v-carousel-item>
+      <v-carousel-item v-for="(computer,i) in computers" v-bind:src="computer.image" :key="i"></v-carousel-item>
     </v-carousel>
 
 
@@ -13,7 +13,7 @@
             <v-card-media
               class="white--text"
               height="200px"
-              v-bind:src="computer.images[0].src"
+              v-bind:src="computer.image"
             >
               <v-container fill-height fluid>
                 <v-layout fill-height>
