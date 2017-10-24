@@ -96,7 +96,7 @@ export default {
   },
   methods:{
     goback(){
-      this.$router.push('home');
+      this.$router.push('/');
     },
     async getComputer(id)
     {
